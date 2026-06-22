@@ -118,6 +118,11 @@ bun exec turbo build --filter=docs
 
 ### Develop
 
+The web landing page reads the `landing-page` global from Payload. Start the CMS
+on port `3002` and the web app on port `3000`. In deployed environments, set
+`PAYLOAD_API_URL` for the web app to the public URL of the CMS. The local default
+is `http://localhost:3002`.
+
 To develop all apps and packages, run the following command:
 
 With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):

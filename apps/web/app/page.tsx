@@ -1,102 +1,90 @@
-import Image, { type ImageProps } from "next/image";
-import { Button } from "@repo/ui/button";
+import {
+  Announcement,
+  AnnouncementTag,
+  AnnouncementTitle,
+} from "@repo/design-system/components/kibo-ui/announcement";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@repo/design-system/components/card";
+import { ArrowDownRight, ArrowUpRight } from "lucide-react";
+
+import { getLandingPage } from "../lib/payload";
 import styles from "./page.module.css";
 
-type Props = Omit<ImageProps, "src"> & {
-  srcLight: string;
-  srcDark: string;
-};
-
-const ThemeImage = (props: Props) => {
-  const { srcLight, srcDark, ...rest } = props;
+export default async function Home() {
+  const content = await getLandingPage();
 
   return (
-    <>
-      <Image {...rest} src={srcLight} className="imgLight" />
-      <Image {...rest} src={srcDark} className="imgDark" />
-    </>
-  );
-};
+    <main className={styles.page}>
+      <div className={styles.glow} aria-hidden="true" />
+      <header className={styles.header}>
+        <a className={styles.brand} href="#top" aria-label={content.brandName}>
+          <span className={styles.brandMark} aria-hidden="true" />
+          {content.brandName}
+        </a>
+        <span className={styles.headerNote}>{content.eyebrow}</span>
+      </header>
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <ThemeImage
-          className={styles.logo}
-          srcLight="turborepo-dark.svg"
-          srcDark="turborepo-light.svg"
-          alt="Turborepo logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>apps/web/app/page.tsx</code>
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+      <section className={styles.hero} id="top">
+        <Announcement themed className={styles.announcement}>
+          <AnnouncementTag>{content.announcement.label}</AnnouncementTag>
+          <AnnouncementTitle>
+            {content.announcement.text}
+            <ArrowUpRight aria-hidden="true" size={14} />
+          </AnnouncementTitle>
+        </Announcement>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new/clone?demo-description=Learn+to+implement+a+monorepo+with+a+two+Next.js+sites+that+has+installed+three+local+packages.&demo-image=%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F4K8ZISWAzJ8X1504ca0zmC%2F0b21a1c6246add355e55816278ef54bc%2FBasic.png&demo-title=Monorepo+with+Turborepo&demo-url=https%3A%2F%2Fexamples-basic-web.vercel.sh%2F&from=templates&project-name=Monorepo+with+Turborepo&repository-name=monorepo-turborepo&repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fturborepo%2Ftree%2Fmain%2Fexamples%2Fbasic&root-directory=apps%2Fdocs&skippable-integrations=1&teamSlug=vercel&utm_source=create-turbo"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://turborepo.dev/docs?utm_source"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+        <h1>{content.headline}</h1>
+        <div className={styles.heroFooter}>
+          <p>{content.description}</p>
+          <div className={styles.actions}>
+            <a
+              className={styles.primaryAction}
+              href={content.actions.primaryHref}
+            >
+              {content.actions.primaryLabel}
+              <ArrowDownRight aria-hidden="true" size={18} />
+            </a>
+            <a
+              className={styles.secondaryAction}
+              href={content.actions.secondaryHref}
+            >
+              {content.actions.secondaryLabel}
+              <ArrowUpRight aria-hidden="true" size={18} />
+            </a>
+          </div>
         </div>
-        <Button appName="web" className={styles.secondary}>
-          Open alert
-        </Button>
-      </main>
+      </section>
+
+      <section className={styles.features} id="features">
+        <div className={styles.sectionHeading}>
+          <span>{content.featuresLabel}</span>
+          <h2>{content.featuresHeading}</h2>
+        </div>
+        <div className={styles.cardGrid}>
+          {content.features.map((feature) => (
+            <Card className={styles.card} key={feature.id ?? feature.number}>
+              <CardHeader>
+                <span className={styles.featureNumber}>{feature.number}</span>
+                <CardTitle className={styles.cardTitle}>
+                  {feature.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>{feature.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com/templates?search=turborepo&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://turborepo.dev?utm_source=create-turbo"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to turborepo.dev →
-        </a>
+        <span>{content.brandName}</span>
+        <span>{content.footerText}</span>
       </footer>
-    </div>
+    </main>
   );
 }

@@ -7,6 +7,7 @@ import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
 import { testEmailAdapter } from './helpers/testEmailAdapter.js'
+import { LandingPage } from './globals/LandingPage.js'
 import { seed } from './seed.js'
 
 const filename = fileURLToPath(import.meta.url)
@@ -48,6 +49,7 @@ export default buildConfig({
   }),
   editor: lexicalEditor(),
   email: testEmailAdapter,
+  globals: [LandingPage],
   onInit: async (payload) => {
     await seed(payload)
   },
