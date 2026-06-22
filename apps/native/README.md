@@ -1,6 +1,6 @@
 # Native
 
-Expo SDK 56 React Native app using Expo Router and
+Expo SDK 55 React Native app using Expo Router and
 `@repo/native-design-system`.
 
 ```sh
