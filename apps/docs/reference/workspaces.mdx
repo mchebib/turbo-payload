@@ -1,0 +1,33 @@
+---
+title: "Workspaces"
+description: "Applications and shared packages in the Turborepo."
+---
+
+## Applications
+
+| Path        | Workspace | Responsibility                        |
+| ----------- | --------- | ------------------------------------- |
+| `apps/web`  | `web`     | Public Next.js application            |
+| `apps/docs` | `docs`    | Mintlify documentation source         |
+| `apps/cms`  | `cms`     | Payload configuration, admin, and API |
+
+## Shared packages
+
+| Path                         | Package                   | Responsibility                             |
+| ---------------------------- | ------------------------- | ------------------------------------------ |
+| `packages/design-system`     | `@repo/design-system`     | shadcn/ui, KIBO UI, and shared styles      |
+| `packages/database`          | `@repo/database`          | Shared Prisma database configuration       |
+| `packages/eslint-config`     | `@repo/eslint-config`     | ESLint presets                             |
+| `packages/typescript-config` | `@repo/typescript-config` | TypeScript presets                         |
+| `packages/ui`                | `@repo/ui`                | Legacy starter components during migration |
+
+## Common commands
+
+```bash
+bun run dev
+bun run build
+bun run lint
+bun run check-types
+```
+
+Append `--filter=<workspace>` to target one workspace.

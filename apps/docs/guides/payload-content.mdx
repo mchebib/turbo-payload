@@ -1,0 +1,36 @@
+---
+title: "Payload content"
+description: "Edit landing-page content in Payload and expose it to the web application."
+---
+
+The web landing page is backed by the public `landing-page` Payload global. Its
+schema lives in `apps/cms/dev/globals/LandingPage.ts`.
+
+## Edit the landing page
+
+1. Start the CMS with `bun run dev --filter=cms`.
+2. Open `http://localhost:3002/admin`.
+3. Select **Landing Page** under **Website**.
+4. Update the hero, actions, features, or footer.
+5. Save the global.
+
+The web app reads the global through Payload's REST endpoint:
+
+```http
+GET /api/globals/landing-page
+```
+
+## Content lifecycle
+
+```mermaid
+flowchart LR
+  Editor[Payload editor] --> Global[landing-page global]
+  Global --> API[Payload REST API]
+  API --> Web[Next.js web app]
+```
+
+<Info>
+  Public read access is enabled for this global because the content is intended
+  for the public landing page. Keep write access restricted to authenticated
+  Payload users.
+</Info>

@@ -1,0 +1,40 @@
+---
+title: "Web app"
+description: "How the Next.js app fetches Payload content and composes the shared design system."
+---
+
+The web app is a Next.js server-rendered frontend in `apps/web`. Its home page
+loads content through `apps/web/lib/payload.ts` and renders the result in
+`apps/web/app/page.tsx`.
+
+## Data fetching
+
+The server requests the public Payload global and caches the result for one
+minute:
+
+```ts
+const response = await fetch(`${payloadURL}/api/globals/landing-page`, {
+  next: { revalidate: 60 },
+});
+```
+
+Set `PAYLOAD_API_URL` when the CMS is not available at the local default of
+`http://localhost:3002`.
+
+## Design system
+
+New interface work should use `@repo/design-system`. Import shared components
+through their package exports:
+
+```tsx
+import { Card } from "@repo/design-system/components/card";
+import {
+  Announcement,
+  AnnouncementTitle,
+} from "@repo/design-system/components/kibo-ui/announcement";
+```
+
+<Warning>
+  Do not add new components to the legacy `@repo/ui` package. The shared design
+  system is the target package for shadcn/ui and KIBO UI components.
+</Warning>

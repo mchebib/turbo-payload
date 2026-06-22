@@ -1,0 +1,39 @@
+---
+title: "Turbo Payload"
+description: "A Turborepo with a Payload CMS, Next.js web app, shared design system, and Mintlify documentation."
+---
+
+Turbo Payload keeps content management, presentation, documentation, and shared
+packages in one Bun-powered monorepo.
+
+<CardGroup cols={2}>
+  <Card
+    title="Manage content"
+    icon="pen-to-square"
+    href="/guides/payload-content"
+  >
+    Model and edit website content in Payload CMS.
+  </Card>
+  <Card title="Build the web app" icon="browser" href="/guides/web-app">
+    Render Payload content in the Next.js frontend with shared UI components.
+  </Card>
+  <Card title="Understand the repo" icon="folders" href="/reference/workspaces">
+    See how applications and packages fit together.
+  </Card>
+  <Card title="Configure services" icon="sliders" href="/reference/environment">
+    Set the environment variables used during local development and deployment.
+  </Card>
+</CardGroup>
+
+## Applications
+
+| Workspace   | Purpose                | Local URL               |
+| ----------- | ---------------------- | ----------------------- |
+| `apps/web`  | Public Next.js web app | `http://localhost:3000` |
+| `apps/docs` | Mintlify documentation | `http://localhost:3001` |
+| `apps/cms`  | Payload CMS and admin  | `http://localhost:3002` |
+
+<Tip>
+  Start with the quickstart to install dependencies and run all applications
+  together.
+</Tip>

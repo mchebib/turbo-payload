@@ -1,0 +1,51 @@
+---
+title: "Quickstart"
+description: "Install the monorepo and run the web app, docs, and Payload CMS locally."
+---
+
+## Prerequisites
+
+- Bun 1.3 or newer
+- Node.js 20.17 or newer for the Mintlify CLI
+- A PostgreSQL database for Payload
+
+<Steps>
+  <Step title="Install dependencies">
+    From the repository root, install every workspace dependency.
+
+    ```bash
+    bun install
+    ```
+
+  </Step>
+  <Step title="Configure Payload">
+    Provide the database connection and Payload secret in your local environment.
+
+    ```bash
+    export DATABASE_URL="postgresql://user:password@localhost:5432/turbo_payload"
+    export PAYLOAD_SECRET="replace-me"
+    ```
+
+  </Step>
+  <Step title="Start the workspaces">
+    Run all persistent development tasks through Turborepo.
+
+    ```bash
+    bun run dev
+    ```
+
+  </Step>
+</Steps>
+
+To run one application at a time, use a workspace filter:
+
+```bash
+bun run dev --filter=web
+bun run dev --filter=docs
+bun run dev --filter=cms
+```
+
+<Note>
+  The docs app runs on port `3001`, matching the previous starter app while
+  using Mintlify instead of Next.js.
+</Note>

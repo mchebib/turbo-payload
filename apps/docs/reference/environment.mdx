@@ -1,0 +1,21 @@
+---
+title: "Environment"
+description: "Environment variables used by Payload and the web application."
+---
+
+| Variable          | Used by | Required    | Description                                              |
+| ----------------- | ------- | ----------- | -------------------------------------------------------- |
+| `DATABASE_URL`    | CMS     | Yes         | PostgreSQL connection string used by Payload             |
+| `DATABASE_URI`    | CMS     | Alternative | Legacy alias accepted when `DATABASE_URL` is absent      |
+| `PAYLOAD_SECRET`  | CMS     | Production  | Secret used to sign Payload tokens                       |
+| `PAYLOAD_API_URL` | Web     | No          | Public CMS base URL; defaults to `http://localhost:3002` |
+
+## Deployment
+
+Set `PAYLOAD_API_URL` on the web deployment to the public CMS origin. Include the
+variable in Turborepo's `globalEnv` list so changing it invalidates cached builds.
+
+<Warning>
+  The fallback Payload secret in the development config is not suitable for a
+  production deployment. Always provide `PAYLOAD_SECRET` in production.
+</Warning>

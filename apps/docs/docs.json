@@ -1,0 +1,32 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Turbo Payload",
+  "description": "Documentation for the Turbo Payload monorepo.",
+  "colors": {
+    "primary": "#17241D",
+    "light": "#4D7C5B",
+    "dark": "#C7FF47"
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Get started",
+        "pages": ["index", "quickstart"]
+      },
+      {
+        "group": "Guides",
+        "pages": ["guides/payload-content", "guides/web-app"]
+      },
+      {
+        "group": "Reference",
+        "pages": ["reference/workspaces", "reference/environment"]
+      }
+    ]
+  }
+}
