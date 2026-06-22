@@ -1,8 +1,12 @@
 import { withPayload } from '@payloadcms/next/withPayload'
+import nextEnv from '@next/env'
 import { fileURLToPath } from 'url'
 import path from 'path'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
+const { loadEnvConfig } = nextEnv
+
+loadEnvConfig(path.resolve(dirname, '..'), process.env.NODE_ENV !== 'production', console, true)
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -15,7 +19,6 @@ const nextConfig = {
 
     return webpackConfig
   },
-  serverExternalPackages: ['mongodb-memory-server'],
 }
 
 export default withPayload(nextConfig, { devBundleServerPackages: false })
