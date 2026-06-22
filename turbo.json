@@ -1,6 +1,11 @@
 {
   "$schema": "https://turborepo.dev/schema.json",
-  "globalEnv": ["CRON_SECRET", "NEXT_PUBLIC_API_URL", "PAYLOAD_API_URL"],
+  "globalEnv": [
+    "CRON_SECRET",
+    "EXPO_PUBLIC_API_URL",
+    "NEXT_PUBLIC_API_URL",
+    "PAYLOAD_API_URL"
+  ],
   "ui": "tui",
   "tasks": {
     "build": {

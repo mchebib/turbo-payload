@@ -1,0 +1,25 @@
+{
+  "name": "@repo/native-design-system",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./components": "./src/components.tsx",
+    "./tokens": "./src/tokens.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=19.2.0",
+    "react-native": ">=0.85.0"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "@types/react": "~19.2.2",
+    "react": "19.2.3",
+    "react-native": "0.85.3",
+    "typescript": "~6.0.3"
+  }
+}

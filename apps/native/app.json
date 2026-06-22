@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "Northstar",
+    "slug": "turbo-payload-native",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "northstar",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.turbopayload.northstar"
+    },
+    "android": {
+      "package": "com.turbopayload.northstar",
+      "predictiveBackGestureEnabled": true
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}
