@@ -18,11 +18,59 @@ This Turborepo includes the following packages/apps:
 
 - `docs`: a [Next.js](https://nextjs.org/) app
 - `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
+- `cms`: a [Payload CMS](https://payloadcms.com/) development app
+- `@repo/design-system`: the shared shadcn/ui and Kibo UI component package
+- `@repo/ui`: the original starter components, retained temporarily for `web` and `docs`
+- `@repo/database`: shared Prisma database configuration
 - `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+
+### Shared UI packages
+
+The repository currently contains two React component packages:
+
+- `@repo/design-system` is the preferred package for new work. It contains the
+  shared Tailwind v4 theme, shadcn/ui primitives, and Kibo UI components.
+- `@repo/ui` contains the original Turborepo starter components. `web` and
+  `docs` still use its `Button`, so it remains available during migration.
+
+Use a design-system component with its exported subpath:
+
+```tsx
+import { Card } from '@repo/design-system/components/card'
+import {
+  GanttHeader,
+  GanttProvider,
+  GanttTimeline,
+} from '@repo/design-system/components/kibo-ui/gantt'
+```
+
+The consuming app must list `@repo/design-system` in `dependencies` and import
+the shared stylesheet once from its root layout:
+
+```tsx
+import '@repo/design-system/globals.css'
+```
+
+The app must also process Tailwind CSS v4. Detailed setup and registry commands
+are in [`packages/design-system/README.md`](packages/design-system/README.md).
+
+Existing starter components continue to use direct `@repo/ui` subpaths:
+
+```tsx
+import { Button } from '@repo/ui/button'
+import { Card } from '@repo/ui/card'
+```
+
+#### Long-term recommendation
+
+Keep only one shared component package. Use `@repo/design-system` as the target
+because it already owns the theme, shadcn configuration, Kibo components, and
+supporting utilities. Migrate the three components in `@repo/ui` into the design
+system, update imports in `web` and `docs`, and then remove `packages/ui`. Until
+that migration is complete, avoid adding new components to `@repo/ui`.
 
 ### Utilities
 
