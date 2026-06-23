@@ -3,6 +3,8 @@ import {
   AnnouncementTag,
   AnnouncementTitle,
 } from "@repo/design-system/components/kibo-ui/announcement";
+import { UserButton } from "@repo/auth/provider";
+import { currentUser } from "@repo/auth/server";
 import {
   Card,
   CardContent,
@@ -43,7 +45,16 @@ const activity = [
   { title: "Documentation published", meta: "Mintlify · 2 hours ago" },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const user = await currentUser();
+  const displayName =
+    user?.fullName || user?.primaryEmailAddress?.emailAddress || "Workspace admin";
+  const displayEmail = user?.primaryEmailAddress?.emailAddress || "Signed in";
+  const initials =
+    user?.firstName?.at(0) ||
+    user?.primaryEmailAddress?.emailAddress.at(0)?.toUpperCase() ||
+    "N";
+
   return (
     <main className={styles.shell}>
       <aside className={styles.sidebar}>
@@ -76,10 +87,10 @@ export default function Home() {
             Settings
           </a>
           <div className={styles.profile}>
-            <span>MC</span>
+            <span>{initials}</span>
             <div>
-              <strong>Workspace admin</strong>
-              <small>admin@example.com</small>
+              <strong>{displayName}</strong>
+              <small>{displayEmail}</small>
             </div>
           </div>
         </div>
@@ -92,6 +103,7 @@ export default function Home() {
           </div>
           <div className={styles.topbarActions}>
             <ApiStatus />
+            <UserButton />
             <a href="http://localhost:3002/admin">
               Open Payload
               <ArrowUpRight aria-hidden="true" size={16} />
