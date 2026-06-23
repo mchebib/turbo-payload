@@ -120,6 +120,13 @@
         "typescript": "~5.9.2",
       },
     },
+    "apps/studio": {
+      "name": "studio",
+      "version": "0.1.0",
+      "devDependencies": {
+        "@repo/database": "*",
+      },
+    },
     "apps/web": {
       "name": "web",
       "version": "0.1.0",
@@ -150,6 +157,7 @@
         "@prisma/client": "latest",
       },
       "devDependencies": {
+        "dotenv": "^17.4.2",
         "prisma": "latest",
       },
     },
