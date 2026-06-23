@@ -9,7 +9,7 @@ export function ApiStatus() {
 
   useEffect(() => {
     const controller = new AbortController();
-    const apiURL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3003";
+    const apiURL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3005";
 
     fetch(`${apiURL}/health`, {
       cache: "no-store",

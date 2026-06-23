@@ -7,7 +7,7 @@ export function useApiHealth() {
   const [refreshing, setRefreshing] = useState(false);
 
   const requestHealth = useCallback(async () => {
-    const apiURL = process.env.EXPO_PUBLIC_API_URL ?? "http://localhost:3003";
+    const apiURL = process.env.EXPO_PUBLIC_API_URL ?? "http://localhost:3005";
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 4000);
 

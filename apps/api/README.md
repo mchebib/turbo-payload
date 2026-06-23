@@ -7,7 +7,7 @@ next-forge.
 bun run dev --filter=api
 ```
 
-The service listens on `http://localhost:3003` and exposes:
+The service listens on `http://localhost:3005` and exposes:
 
 - `GET /` - service metadata
 - `GET /health` - liveness check
