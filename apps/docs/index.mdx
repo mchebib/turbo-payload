@@ -1,10 +1,11 @@
 ---
 title: "Turbo Payload"
-description: "A Turborepo with a Payload CMS, Next.js web app, shared design system, and Mintlify documentation."
+description: "A Turborepo with Payload CMS, Clerk auth, Next.js apps, Expo, Prisma, shared design systems, and Mintlify documentation."
 ---
 
-Turbo Payload keeps content management, presentation, documentation, and shared
-packages in one Bun-powered monorepo.
+Turbo Payload keeps content management, authenticated product workflows,
+presentation, API routes, mobile surfaces, documentation, and shared packages in
+one Bun-powered monorepo.
 
 <CardGroup cols={2}>
   <Card
@@ -17,6 +18,9 @@ packages in one Bun-powered monorepo.
   <Card title="Build the web app" icon="browser" href="/guides/web-app">
     Render Payload content in the Next.js frontend with shared UI components.
   </Card>
+  <Card title="Authenticate users" icon="shield-check" href="/guides/app-auth">
+    Use Clerk through the shared auth package in the product app.
+  </Card>
   <Card title="Understand the repo" icon="folders" href="/reference/workspaces">
     See how applications and packages fit together.
   </Card>
@@ -27,11 +31,14 @@ packages in one Bun-powered monorepo.
 
 ## Applications
 
-| Workspace   | Purpose                | Local URL               |
-| ----------- | ---------------------- | ----------------------- |
-| `apps/web`  | Public Next.js web app | `http://localhost:3000` |
-| `apps/docs` | Mintlify documentation | `http://localhost:3001` |
-| `apps/cms`  | Payload CMS and admin  | `http://localhost:3002` |
+| Workspace     | Purpose                       | Local URL               |
+| ------------- | ----------------------------- | ----------------------- |
+| `apps/web`    | Public Next.js web app        | `http://localhost:3000` |
+| `apps/docs`   | Mintlify documentation        | `http://localhost:3001` |
+| `apps/cms`    | Payload CMS and admin         | `http://localhost:3002` |
+| `apps/app`    | Clerk-authenticated workspace | `http://localhost:3004` |
+| `apps/api`    | API-only Next.js service      | `http://localhost:3005` |
+| `apps/studio` | Prisma Studio                 | `http://localhost:3006` |
 
 <Tip>
   Start with the quickstart to install dependencies and run all applications

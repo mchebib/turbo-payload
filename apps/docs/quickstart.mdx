@@ -1,6 +1,6 @@
 ---
 title: "Quickstart"
-description: "Install the monorepo and run the web app, docs, and Payload CMS locally."
+description: "Install the monorepo and run the web, app, API, docs, Payload CMS, and Prisma Studio workspaces locally."
 ---
 
 ## Prerequisites
@@ -8,6 +8,7 @@ description: "Install the monorepo and run the web app, docs, and Payload CMS lo
 - Bun 1.3 or newer
 - Node.js 20.17 or newer for the Mintlify CLI
 - A PostgreSQL database for Payload
+- Clerk application keys for the authenticated product app
 
 <Steps>
   <Step title="Install dependencies">
@@ -27,6 +28,18 @@ description: "Install the monorepo and run the web app, docs, and Payload CMS lo
     ```
 
   </Step>
+  <Step title="Configure Clerk">
+    The product app is protected by Clerk. Add Clerk keys to
+    `apps/app/.env.local` or your shell before running `apps/app`.
+
+    ```bash
+    export NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_test_..."
+    export CLERK_SECRET_KEY="sk_test_..."
+    export NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
+    export NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
+    ```
+
+  </Step>
   <Step title="Start the workspaces">
     Run all persistent development tasks through Turborepo.
 
@@ -43,6 +56,10 @@ To run one application at a time, use a workspace filter:
 bun run dev --filter=web
 bun run dev --filter=docs
 bun run dev --filter=cms
+bun run dev --filter=app
+bun run dev --filter=api
+bun run dev --filter=native
+bun run dev --filter=studio
 ```
 
 <Note>

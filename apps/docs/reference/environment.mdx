@@ -1,19 +1,85 @@
 ---
 title: "Environment"
-description: "Environment variables used by Payload and the web application."
+description: "Environment variables used by the monorepo workspaces."
 ---
 
-| Variable          | Used by | Required    | Description                                              |
-| ----------------- | ------- | ----------- | -------------------------------------------------------- |
-| `DATABASE_URL`    | CMS     | Yes         | PostgreSQL connection string used by Payload             |
-| `DATABASE_URI`    | CMS     | Alternative | Legacy alias accepted when `DATABASE_URL` is absent      |
-| `PAYLOAD_SECRET`  | CMS     | Production  | Secret used to sign Payload tokens                       |
-| `PAYLOAD_API_URL` | Web     | No          | Public CMS base URL; defaults to `http://localhost:3002` |
+| Variable                            | Used by     | Required    | Add to local file       | Description                                                   |
+| ----------------------------------- | ----------- | ----------- | ----------------------- | ------------------------------------------------------------- |
+| `DATABASE_URL`                      | CMS         | Yes         | `apps/cms/.env`         | PostgreSQL connection string used by Payload                  |
+| `DATABASE_URL`                      | Studio      | Yes         | `packages/database/.env` | PostgreSQL connection string used by Prisma Studio            |
+| `DATABASE_URI`                      | CMS         | Alternative | `apps/cms/.env`         | Legacy alias accepted when `DATABASE_URL` is absent           |
+| `PAYLOAD_SECRET`                    | CMS         | Production  | `apps/cms/.env`         | Secret used to sign Payload tokens                            |
+| `PAYLOAD_API_URL`                   | Web         | No          | `apps/web/.env.local`   | Public CMS base URL; defaults to `http://localhost:3002`      |
+| `NEXT_PUBLIC_API_URL`               | App         | No          | `apps/app/.env.local`   | Public API URL; app defaults to `http://localhost:3005`        |
+| `NEXT_PUBLIC_API_URL`               | Native      | No          | `apps/native/.env.local` | API URL used by the Expo app                                  |
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | App         | Yes         | `apps/app/.env.local`   | Clerk browser publishable key                                 |
+| `CLERK_SECRET_KEY`                  | App         | Yes         | `apps/app/.env.local`   | Clerk server secret key                                       |
+| `NEXT_PUBLIC_CLERK_SIGN_IN_URL`     | App         | Yes         | `apps/app/.env.local`   | Product app sign-in route, normally `/sign-in`                |
+| `NEXT_PUBLIC_CLERK_SIGN_UP_URL`     | App         | Yes         | `apps/app/.env.local`   | Product app sign-up route, normally `/sign-up`                |
+| `CRON_SECRET`                       | API         | Production  | `apps/api/.env.local`   | Bearer token expected by protected cron routes                |
+| `EXPO_PUBLIC_API_URL`               | Native      | No          | `apps/native/.env.local` | API URL reachable by the simulator or device                  |
+
+## Local samples
+
+Create local files next to each workspace. Keep `.env.local` files out of Git.
+
+### `apps/cms/.env`
+
+```env
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/turbo_payload
+PAYLOAD_SECRET=replace-with-a-long-random-value
+```
+
+`DATABASE_URI` is only a legacy fallback. Prefer `DATABASE_URL`.
+
+### `packages/database/.env`
+
+```env
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/turbo_payload
+```
+
+Prisma Studio runs from `packages/database`, so it reads this file when started
+through `bun run dev --filter=studio`.
+
+### `apps/web/.env.local`
+
+```env
+PAYLOAD_API_URL=http://localhost:3002
+```
+
+### `apps/app/.env.local`
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3005
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_replace_me
+CLERK_SECRET_KEY=sk_test_replace_me
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+```
+
+### `apps/api/.env.local`
+
+```env
+CRON_SECRET=replace-with-a-long-random-value
+```
+
+### `apps/native/.env.local`
+
+```env
+EXPO_PUBLIC_API_URL=http://localhost:3005
+```
+
+Use `http://10.0.2.2:3005` instead when running the Android emulator against a
+host-machine API server.
 
 ## Deployment
 
 Set `PAYLOAD_API_URL` on the web deployment to the public CMS origin. Include the
 variable in Turborepo's `globalEnv` list so changing it invalidates cached builds.
+
+Set Clerk variables on the product app deployment. They are also included in
+Turborepo's `globalEnv` list so auth configuration changes invalidate cached
+builds.
 
 <Warning>
   The fallback Payload secret in the development config is not suitable for a

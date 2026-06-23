@@ -16,10 +16,16 @@ This Turborepo includes the following packages/apps:
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
+- `docs`: a [Mintlify](https://mintlify.com/) documentation app
+- `web`: public [Next.js](https://nextjs.org/) app
+- `app`: authenticated product workspace built with Next.js and Clerk
+- `api`: API-only Next.js service for health, readiness, versioned, and cron routes
 - `cms`: a [Payload CMS](https://payloadcms.com/) development app
+- `native`: Expo React Native app
+- `studio`: Prisma Studio workspace for database inspection
+- `@repo/auth`: shared Clerk authentication exports
 - `@repo/design-system`: the shared shadcn/ui and Kibo UI component package
+- `@repo/native-design-system`: shared React Native design tokens and components
 - `@repo/ui`: the original starter components, retained temporarily for `web` and `docs`
 - `@repo/database`: shared Prisma database configuration
 - `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
@@ -123,6 +129,11 @@ on port `3002` and the web app on port `3000`. In deployed environments, set
 `PAYLOAD_API_URL` for the web app to the public URL of the CMS. The local default
 is `http://localhost:3002`.
 
+The product app runs on port `3004` and uses Clerk through `@repo/auth`. Provide
+`NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` before opening
+protected app routes. The API service runs on port `3005`, and Prisma Studio
+runs on port `3006`.
+
 To develop all apps and packages, run the following command:
 
 With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
@@ -155,6 +166,18 @@ Without global `turbo`:
 npx turbo dev --filter=web
 bun exec turbo dev --filter=web
 bun exec turbo dev --filter=web
+```
+
+Useful workspace filters:
+
+```sh
+bun run dev --filter=web
+bun run dev --filter=docs
+bun run dev --filter=cms
+bun run dev --filter=app
+bun run dev --filter=api
+bun run dev --filter=native
+bun run dev --filter=studio
 ```
 
 ### Remote Caching

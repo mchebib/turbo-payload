@@ -1,0 +1,47 @@
+---
+title: "App authentication"
+description: "How the product app uses Clerk through the shared auth package."
+---
+
+The product workspace in `apps/app` is protected by Clerk. Auth integration is
+kept in `packages/auth` so application code imports a repository-owned API
+instead of importing Clerk directly throughout the app.
+
+## Package exports
+
+Use the shared package subpaths:
+
+```tsx
+import { ClerkProvider, UserButton } from "@repo/auth/provider";
+import { currentUser } from "@repo/auth/server";
+import { SignIn, SignUp } from "@repo/auth/components";
+```
+
+`@repo/auth/provider` exposes Clerk provider and account UI components.
+`@repo/auth/server` exposes server helpers and middleware helpers.
+`@repo/auth/components` exposes the prebuilt sign-in and sign-up components.
+
+## Routes
+
+The app defines Clerk UI routes at:
+
+| Route      | File                                                   |
+| ---------- | ------------------------------------------------------ |
+| `/sign-in` | `apps/app/app/sign-in/[[...sign-in]]/page.tsx`         |
+| `/sign-up` | `apps/app/app/sign-up/[[...sign-up]]/page.tsx`         |
+
+All other app routes are protected by `apps/app/proxy.ts`.
+
+## Environment
+
+Set these variables for local development and deployment:
+
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+```
+
+The product app also reads `NEXT_PUBLIC_API_URL`, which defaults locally to the
+API service on `http://localhost:3005`.

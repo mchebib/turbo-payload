@@ -21,7 +21,7 @@
       },
       {
         "group": "Guides",
-        "pages": ["guides/payload-content", "guides/web-app"]
+        "pages": ["guides/payload-content", "guides/web-app", "guides/app-auth"]
       },
       {
         "group": "Reference",

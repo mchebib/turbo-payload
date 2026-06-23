@@ -5,21 +5,27 @@ description: "Applications and shared packages in the Turborepo."
 
 ## Applications
 
-| Path        | Workspace | Responsibility                        |
-| ----------- | --------- | ------------------------------------- |
-| `apps/web`  | `web`     | Public Next.js application            |
-| `apps/docs` | `docs`    | Mintlify documentation source         |
-| `apps/cms`  | `cms`     | Payload configuration, admin, and API |
+| Path          | Workspace | Responsibility                        |
+| ------------- | --------- | ------------------------------------- |
+| `apps/web`    | `web`     | Public Next.js application            |
+| `apps/docs`   | `docs`    | Mintlify documentation source         |
+| `apps/cms`    | `cms`     | Payload configuration, admin, and API |
+| `apps/app`    | `app`     | Clerk-authenticated product workspace |
+| `apps/api`    | `api`     | API-only Next.js service              |
+| `apps/native` | `native`  | Expo React Native application         |
+| `apps/studio` | `studio`  | Prisma Studio for database browsing   |
 
 ## Shared packages
 
-| Path                         | Package                   | Responsibility                             |
-| ---------------------------- | ------------------------- | ------------------------------------------ |
-| `packages/design-system`     | `@repo/design-system`     | shadcn/ui, KIBO UI, and shared styles      |
-| `packages/database`          | `@repo/database`          | Shared Prisma database configuration       |
-| `packages/eslint-config`     | `@repo/eslint-config`     | ESLint presets                             |
-| `packages/typescript-config` | `@repo/typescript-config` | TypeScript presets                         |
-| `packages/ui`                | `@repo/ui`                | Legacy starter components during migration |
+| Path                            | Package                      | Responsibility                                      |
+| ------------------------------- | ---------------------------- | --------------------------------------------------- |
+| `packages/auth`                 | `@repo/auth`                 | Shared Clerk provider, components, and server helpers |
+| `packages/design-system`        | `@repo/design-system`        | shadcn/ui, KIBO UI, and shared styles               |
+| `packages/database`             | `@repo/database`             | Shared Prisma database configuration                |
+| `packages/eslint-config`        | `@repo/eslint-config`        | ESLint presets                                      |
+| `packages/native-design-system` | `@repo/native-design-system` | React Native tokens and components                  |
+| `packages/typescript-config`    | `@repo/typescript-config`    | TypeScript presets                                  |
+| `packages/ui`                   | `@repo/ui`                   | Legacy starter components during migration          |
 
 ## Common commands
 
